@@ -9,7 +9,7 @@ class MaterielRepository @Inject constructor(private val dataSource: IMaterielDa
 
     suspend fun addMateriel(materiel: Materiel) = dataSource.add(materiel)
 
-    suspend fun removeMateriel(code: String) = dataSource.remove(code)
+    suspend fun removeMateriel(materiel: Materiel) = dataSource.remove(materiel)
 
     suspend fun getMateriels() = dataSource.readAll()
 

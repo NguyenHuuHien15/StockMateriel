@@ -6,7 +6,7 @@ interface IMaterielDataSource {
 
     suspend fun add(materiel: Materiel)
 
-    suspend fun remove(materielCode: String)
+    suspend fun remove(materiel: Materiel)
 
     suspend fun readAll(): List<Materiel>
 
