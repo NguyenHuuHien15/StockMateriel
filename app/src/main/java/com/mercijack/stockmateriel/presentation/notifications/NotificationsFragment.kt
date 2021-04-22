@@ -1,4 +1,4 @@
-package com.mercijack.stockmateriel.ui.notifications
+package com.mercijack.stockmateriel.presentation.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

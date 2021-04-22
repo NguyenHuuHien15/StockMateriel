@@ -11,7 +11,7 @@ interface MaterielDao {
     @Delete
     suspend fun removeMateriel(materiel: MaterielEntity)
 
-    @Query("SELECT * from materiel_entity_table")
+    @Query("SELECT * FROM materiel_entity_table")
     fun getMateriels(): List<MaterielEntity>
 
 }
