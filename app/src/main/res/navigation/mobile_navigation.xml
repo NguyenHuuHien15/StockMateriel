@@ -3,23 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/HomeFragment">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/HomeFragment"
         android:name="com.mercijack.stockmateriel.presentation.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_Home_to_Notifications"
+            app:destination="@id/NotificationsFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.mercijack.stockmateriel.presentation.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/NotificationsFragment"
         android:name="com.mercijack.stockmateriel.presentation.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <action
+        android:id="@+id/action_to_Notifications"
+        app:destination="@id/NotificationsFragment" />
+
+    <action
+        android:id="@+id/action_to_Home"
+        app:destination="@id/HomeFragment" />
 </navigation>
