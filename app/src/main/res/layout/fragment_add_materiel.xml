@@ -19,7 +19,6 @@
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/dp_16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,40 +29,47 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextBlackBold24"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_8"
-                    android:text="Mon stock" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/TextBlack14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_16"
-                    android:text="10 matériels" />
-
-                <RelativeLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tf_name"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_16"
-                    android:background="@drawable/blue_border"
-                    android:padding="1dp"
-                    app:backgroundTint="@color/teal_700">
+                    android:hint="Nom"
+                    app:counterEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:helperText="Nom du matériel"
+                    app:helperTextEnabled="true"
+                    app:startIconContentDescription="description"
+                    app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
 
-                    <com.google.android.material.button.MaterialButton
-                        style="@style/TextBlackBold20"
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/blue_border"
-                        android:paddingStart="@dimen/dp_36"
-                        android:paddingEnd="@dimen/dp_36"
-                        android:text="Voir le stock"
-                        android:textAllCaps="false"
-                        app:backgroundTint="@color/white" />
+                        android:layout_height="wrap_content" />
 
-                </RelativeLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tf_code"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_16"
+                    android:hint="Code"
+                    app:counterEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:helperText="Code du matériel"
+                    app:helperTextEnabled="true"
+                    app:startIconContentDescription="description"
+                    app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/TextWhiteBold20"
@@ -73,7 +79,7 @@
                     android:background="@drawable/bacground_rounded_blue_green"
                     android:paddingStart="@dimen/dp_36"
                     android:paddingEnd="@dimen/dp_36"
-                    android:text="Ajouter un matériel"
+                    android:text="Ajouter"
                     android:textAllCaps="false"
                     app:backgroundTint="@color/teal_700" />
 

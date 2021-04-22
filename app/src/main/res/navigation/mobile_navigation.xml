@@ -13,6 +13,10 @@
         <action
             android:id="@+id/action_Home_to_Notifications"
             app:destination="@id/NotificationsFragment" />
+
+        <action
+            android:id="@+id/action_Home_to_AddMateriel"
+            app:destination="@id/AddMaterielFragment" />
     </fragment>
 
     <fragment
@@ -28,4 +32,11 @@
     <action
         android:id="@+id/action_to_Home"
         app:destination="@id/HomeFragment" />
+
+    <fragment
+        android:id="@+id/AddMaterielFragment"
+        android:name="com.mercijack.stockmateriel.presentation.addmateriel.AddMaterielFragment"
+        android:label="AddMaterielFragment"
+        tools:layout="@layout/fragment_add_materiel" />
+
 </navigation>

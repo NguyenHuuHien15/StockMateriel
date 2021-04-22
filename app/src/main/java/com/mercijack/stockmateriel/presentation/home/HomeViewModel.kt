@@ -9,8 +9,16 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-    /*private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    private val _navigateToAddMateriel = MutableLiveData<Boolean>().apply {
+        value = false
     }
-    val text: LiveData<String> = _text*/
+    val navigateToAddMateriel: LiveData<Boolean> = _navigateToAddMateriel
+
+    fun onBtnAddClicked() {
+        _navigateToAddMateriel.value = true
+    }
+
+    fun doneNavigateToAddMateriel() {
+        _navigateToAddMateriel.value = false
+    }
 }

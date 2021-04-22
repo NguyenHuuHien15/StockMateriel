@@ -7,9 +7,9 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title=""
         android:contentDescription=""
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 
-    <item
+    <!--<item
         android:id="@+id/search"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title=""
@@ -21,6 +21,6 @@
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title=""
         android:contentDescription=""
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />-->
 
 </menu>
