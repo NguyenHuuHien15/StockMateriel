@@ -14,11 +14,24 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
     val navigateToAddMateriel: LiveData<Boolean> = _navigateToAddMateriel
 
+    private val _navigateToMaterielsList = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val navigateToMaterielsList: LiveData<Boolean> = _navigateToMaterielsList
+
     fun onBtnAddClicked() {
         _navigateToAddMateriel.value = true
     }
 
     fun doneNavigateToAddMateriel() {
         _navigateToAddMateriel.value = false
+    }
+
+    fun onBtnViewListClicked() {
+        _navigateToMaterielsList.value = true
+    }
+
+    fun doneNavigateToMaterielsList() {
+        _navigateToMaterielsList.value = false
     }
 }

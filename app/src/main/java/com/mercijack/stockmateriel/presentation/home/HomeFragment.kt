@@ -35,5 +35,12 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_Home_to_AddMateriel)
             }
         })
+
+        viewModel.navigateToMaterielsList.observe(viewLifecycleOwner, {
+            if (it == true) {
+                viewModel.doneNavigateToMaterielsList()
+                findNavController().navigate(R.id.action_Home_to_MaterielsList)
+            }
+        })
     }
 }

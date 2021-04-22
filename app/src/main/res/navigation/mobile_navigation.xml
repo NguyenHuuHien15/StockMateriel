@@ -15,6 +15,10 @@
             app:destination="@id/NotificationsFragment" />
 
         <action
+            android:id="@+id/action_Home_to_MaterielsList"
+            app:destination="@id/ItemsCollectionFragment" />
+
+        <action
             android:id="@+id/action_Home_to_AddMateriel"
             app:destination="@id/AddMaterielFragment" />
     </fragment>
@@ -32,6 +36,12 @@
     <action
         android:id="@+id/action_to_Home"
         app:destination="@id/HomeFragment" />
+
+    <fragment
+        android:id="@+id/ItemsCollectionFragment"
+        android:name="com.mercijack.stockmateriel.presentation.listmateriels.MaterielsListFragment"
+        android:label="ItemsCollectionFragment"
+        tools:layout="@layout/fragment_materiels_list" />
 
     <fragment
         android:id="@+id/AddMaterielFragment"
