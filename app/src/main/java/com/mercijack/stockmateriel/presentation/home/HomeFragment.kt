@@ -13,7 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels()
-
     private lateinit var dataBinding: FragmentHomeBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -21,5 +20,10 @@ class HomeFragment : Fragment() {
         dataBinding.lifecycleOwner = viewLifecycleOwner
         dataBinding.viewModel = viewModel
         return dataBinding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        activity?.title = "Gestion du stock"
     }
 }
