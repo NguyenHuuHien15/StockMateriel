@@ -82,7 +82,9 @@
                     android:paddingEnd="@dimen/dp_36"
                     android:text="Ajouter"
                     android:textAllCaps="false"
-                    app:backgroundTint="@color/teal_700" />
+                    app:backgroundTint="@color/teal_700"
+                    app:code="@{viewModel.code}"
+                    app:name="@{viewModel.name}" />
 
             </LinearLayout>
         </ScrollView>
