@@ -1,11 +1,14 @@
 package com.mercijack.stockmateriel.presentation.addmateriel
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.internal.TextWatcherAdapter
 import com.mercijack.stockmateriel.databinding.FragmentAddMaterielBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,5 +28,35 @@ class AddMaterielFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Rajoute d'un matériel"
+
+        dataBinding.tfCode.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // do nothing
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.updateCode(s.toString())
+            }
+
+        })
+
+        dataBinding.tfName.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // do nothing
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.updateName(s.toString())
+            }
+
+        })
     }
 }

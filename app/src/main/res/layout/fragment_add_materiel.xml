@@ -30,7 +30,6 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tf_name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,13 +44,13 @@
                     app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tf_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tf_code"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,6 +65,7 @@
                     app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tf_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -77,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_16"
                     android:background="@drawable/bacground_rounded_blue_green"
+                    android:onClick="@{() -> viewModel.onBtnAddClicked()}"
                     android:paddingStart="@dimen/dp_36"
                     android:paddingEnd="@dimen/dp_36"
                     android:text="Ajouter"
