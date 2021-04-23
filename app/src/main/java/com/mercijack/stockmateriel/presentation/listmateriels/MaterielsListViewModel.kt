@@ -22,8 +22,12 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
     private val _clickedItem: MutableLiveData<Materiel> = MutableLiveData()
     val clickedItem: LiveData<Materiel> get() = _clickedItem
 
+    private val _removeSuccess = MutableLiveData<Boolean>()
+    val removeSuccess: LiveData<Boolean> get() = _removeSuccess
+
     init {
         _clickedItem.value = null
+        _removeSuccess.value = false
         updateMaterielsList()
     }
 
@@ -45,6 +49,7 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
         viewModelScope.launch(Dispatchers.IO) {
             interactors.removeMateriel(materiel)
             _materielsList.postValue(interactors.getAllMateriels.invoke())
+            _removeSuccess.postValue(true)
         }
     }
 

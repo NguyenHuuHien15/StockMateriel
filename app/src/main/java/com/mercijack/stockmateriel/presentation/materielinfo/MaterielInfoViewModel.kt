@@ -20,8 +20,12 @@ class MaterielInfoViewModel @Inject constructor(private val interactors: Interac
     private val _backToPrevious = MutableLiveData<Boolean>()
     val backToPrevious: LiveData<Boolean> get() = _backToPrevious
 
+    private val _removeSuccess = MutableLiveData<Boolean>()
+    val removeSuccess: LiveData<Boolean> get() = _removeSuccess
+
     init {
         _backToPrevious.value = false
+        _removeSuccess.value = false
     }
 
     fun setMaterielCode(code: String) {
@@ -44,6 +48,7 @@ class MaterielInfoViewModel @Inject constructor(private val interactors: Interac
             materiel.value?.let {
                 interactors.removeMateriel(it)
                 _backToPrevious.postValue(true)
+                _removeSuccess.postValue(true)
             }
         }
     }
