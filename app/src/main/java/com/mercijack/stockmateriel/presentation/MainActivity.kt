@@ -1,16 +1,23 @@
-package com.mercijack.stockmateriel
+package com.mercijack.stockmateriel.presentation
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.mercijack.stockmateriel.R
 import com.mercijack.stockmateriel.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    lateinit var dataBinding: ActivityMainBinding
+    var _dataBinding: ActivityMainBinding? = null
+    val dataBinding get() = _dataBinding!!
+    private val viewModel: MainViewModel by viewModels()
 
     private val navController by lazy {
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
@@ -19,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        dataBinding = ActivityMainBinding.inflate(layoutInflater)
+        _dataBinding = ActivityMainBinding.inflate(layoutInflater)
+        dataBinding.viewModel = viewModel
         setContentView(dataBinding.root)
 
         setSupportActionBar(dataBinding.toolbar)
@@ -31,11 +39,10 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        dataBinding.navView.selectedItemId = R.id.navigation_home
-    }
 
-    override fun onResume() {
-        super.onResume()
+        viewModel.isFullScreen.observe(this, {
+            if(it == true) doFullScreen() else exitFullScreen()
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -43,12 +50,24 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun displayBottomNav() {
+    private fun exitFullScreen() {
+        supportActionBar?.show()
         dataBinding.navView.visibility = View.VISIBLE
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window?.insetsController?.show(WindowInsets.Type.statusBars())
+        } else {
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
     }
 
-    fun hideBottomNav() {
+    private fun doFullScreen() {
+        supportActionBar?.hide()
         dataBinding.navView.visibility = View.GONE
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window?.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
     }
 
 }

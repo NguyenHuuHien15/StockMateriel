@@ -1,12 +1,15 @@
 package com.mercijack.stockmateriel.presentation.materielinfo
 
-import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import com.mercijack.stockmateriel.MainActivity
 import com.mercijack.stockmateriel.databinding.FragmentMaterielInfoBinding
+import com.mercijack.stockmateriel.presentation.MainActivity
+import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,6 +19,7 @@ class MaterielInfoFragment : Fragment() {
     private lateinit var dataBinding: FragmentMaterielInfoBinding
 
     private val viewModel: MaterielInfoViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         dataBinding = FragmentMaterielInfoBinding.inflate(layoutInflater, container, false)
@@ -28,15 +32,9 @@ class MaterielInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mainActivity = activity as MainActivity
-        mainActivity.supportActionBar?.hide()
-        mainActivity.hideBottomNav()
+        mainActivity.title = "Info du matériel"
 
-        val window = mainActivity.window
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window?.insetsController?.hide(WindowInsets.Type.statusBars())
-        } else {
-            window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        }
+        mainViewModel.setFullScreen(true)
 
         viewModel.setMaterielCode(MaterielInfoFragmentArgs.fromBundle(requireArguments()).code)
 

@@ -1,19 +1,22 @@
 package com.mercijack.stockmateriel.presentation.listmateriels
 
-import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.mercijack.stockmateriel.MainActivity
 import com.mercijack.stockmateriel.databinding.FragmentMaterielsListBinding
 import com.mercijack.stockmateriel.domain.Materiel
 import com.mercijack.stockmateriel.presentation.IDiffItemCallback
 import com.mercijack.stockmateriel.presentation.ITextSearchFilter
+import com.mercijack.stockmateriel.presentation.MainActivity
+import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +27,7 @@ class MaterielsListFragment : Fragment() {
     private lateinit var adapter: MaterielsListRecyAdapter
 
     private val viewModel: MaterielsListViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         dataBinding = FragmentMaterielsListBinding.inflate(layoutInflater, container, false)
@@ -37,15 +41,9 @@ class MaterielsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mainActivity = activity as MainActivity
-        mainActivity.supportActionBar?.show()
-        mainActivity.displayBottomNav()
+        mainActivity.title = "Liste des matériels"
 
-        val window = mainActivity.window
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window?.insetsController?.show(WindowInsets.Type.statusBars())
-        } else {
-            window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        }
+        mainViewModel.setFullScreen(false)
 
         adapter = MaterielsListRecyAdapter(requireContext(), viewModel.materielsList.value, object : ITextSearchFilter<Materiel> {
             override fun shouldBeDisplayed(constraint: CharSequence?, obj: Materiel): Boolean {

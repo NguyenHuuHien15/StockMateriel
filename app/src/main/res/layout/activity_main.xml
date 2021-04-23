@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.mercijack.stockmateriel.presentation.MainViewModel" />
 
     </data>
 
@@ -27,7 +30,6 @@
                 app:navigationIcon="@drawable/ic_home_black_24dp" />
 
         </com.google.android.material.appbar.AppBarLayout>
-
 
         <fragment
             android:id="@+id/nav_host_fragment"
