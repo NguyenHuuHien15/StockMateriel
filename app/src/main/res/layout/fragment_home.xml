@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.mercijack.stockmateriel.presentation.home.HomeViewModel" />
@@ -42,8 +44,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_16"
-                    tools:text="10 matériels"
-                    app:number_materiels="@{viewModel.numberMateriels}" />
+                    app:number_materiels="@{viewModel.numberMateriels}"
+                    tools:text="10 matériels" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -51,6 +53,7 @@
                     android:layout_margin="@dimen/dp_16"
                     android:background="@drawable/blue_border"
                     android:padding="1dp"
+                    android:visibility="@{viewModel.numberMateriels == 0 ? View.GONE : View.VISIBLE }"
                     app:backgroundTint="@color/teal_700">
 
                     <com.google.android.material.button.MaterialButton
@@ -86,6 +89,7 @@
                     android:layout_margin="@dimen/dp_16"
                     android:background="@drawable/blue_border"
                     android:padding="1dp"
+                    android:visibility="@{viewModel.numberMateriels == 0 ? View.GONE : View.VISIBLE }"
                     app:backgroundTint="@color/teal_700">
 
                     <com.google.android.material.button.MaterialButton

@@ -12,7 +12,7 @@ interface MaterielDao {
     suspend fun removeMateriel(materiel: MaterielEntity)
 
     @Query("SELECT * FROM materiel_entity_table")
-    fun getMateriels(): List<MaterielEntity>
+    suspend fun getMateriels(): List<MaterielEntity>
 
     @Query("SELECT * FROM materiel_entity_table WHERE code = :key")
     suspend fun getMaterielByCode(key: String): MaterielEntity?
