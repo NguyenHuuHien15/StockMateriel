@@ -54,7 +54,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_name"
             style="@style/TextBlackBold24"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             tools:text="Name" />
 
         <TextView
-            android:id="@+id/tv_views_or_author"
+            android:id="@+id/tv_code"
             style="@style/Text16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
