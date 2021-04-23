@@ -60,7 +60,10 @@ class AddMaterielFragment : Fragment() {
         })
 
         viewModel.addSuccess.observe(viewLifecycleOwner, {
-            if (it == true) Toast.makeText(context, "Matériel ajouté en succès", Toast.LENGTH_LONG).show()
+            if (it == true) {
+                Toast.makeText(context, "Matériel ajouté en succès", Toast.LENGTH_LONG).show()
+                activity?.onBackPressed()
+            }
         })
 
         viewModel.isMaterielExistedInDb.observe(viewLifecycleOwner, {
