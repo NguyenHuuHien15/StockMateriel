@@ -19,7 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "com.mercijack.stockmateriel.MyCustomTestRunner"
-        //testInstrumentationRunnerArguments clearPackageData: 'true'
+        testInstrumentationRunnerArguments clearPackageData: 'true'
     }
 
     sourceSets {
@@ -51,6 +51,13 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        unitTests {
+            includeAndroidResources = true
+        }
     }
 }
 
