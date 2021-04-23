@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.internal.TextWatcherAdapter
 import com.mercijack.stockmateriel.databinding.FragmentAddMaterielBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +29,7 @@ class AddMaterielFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Rajoute d'un matériel"
 
-        dataBinding.tfCode.addTextChangedListener(object : TextWatcher{
+        dataBinding.tfCode.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
             }
@@ -45,7 +44,7 @@ class AddMaterielFragment : Fragment() {
 
         })
 
-        dataBinding.tfName.addTextChangedListener(object : TextWatcher{
+        dataBinding.tfName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
             }
@@ -61,7 +60,11 @@ class AddMaterielFragment : Fragment() {
         })
 
         viewModel.addSuccess.observe(viewLifecycleOwner, {
-            if(it == true) Toast.makeText(context, "Matériel ajouté en succès", Toast.LENGTH_LONG).show()
+            if (it == true) Toast.makeText(context, "Matériel ajouté en succès", Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.isMaterielExistedInDb.observe(viewLifecycleOwner, {
+            if (it == true) Toast.makeText(context, "Le code existant, matériel n'est pas ajouté", Toast.LENGTH_LONG).show()
         })
     }
 }

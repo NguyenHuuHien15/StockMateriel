@@ -31,6 +31,11 @@ class AddMaterielViewModel @Inject constructor(private val interactors: Interact
     }
     val addSuccess: LiveData<Boolean> get() = _addSuccess
 
+    private val _isMaterielExistedInDb = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val isMaterielExistedInDb: LiveData<Boolean> get() = _isMaterielExistedInDb
+
     fun updateCode(newCode: String) {
         _code.value = newCode
     }
@@ -43,9 +48,15 @@ class AddMaterielViewModel @Inject constructor(private val interactors: Interact
         viewModelScope.launch {
             val codeValue = code.value.toString()
             val nameValue = name.value.toString()
-            Log.d(LOG_TAG, "Code = $codeValue, name = $nameValue")
-            interactors.addMateriel(Materiel(codeValue, nameValue))
-            _addSuccess.value = true
+            val materielFromDb = interactors.getMaterielByCode.invoke(codeValue)
+            val isMaterielExisted = materielFromDb != null
+            Log.d(LOG_TAG, "Code = $codeValue, name = $nameValue, existed = $isMaterielExisted")
+            if (isMaterielExisted) {
+                _isMaterielExistedInDb.value = true
+            } else {
+                interactors.addMateriel(Materiel(codeValue, nameValue))
+                _addSuccess.value = true
+            }
         }
     }
 }

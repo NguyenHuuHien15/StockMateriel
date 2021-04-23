@@ -21,7 +21,8 @@ class RoomMaterielDataSource @Inject constructor(private val materielDao: Materi
         return materielDao.getMateriels().map { it.toDomain() }
     }
 
-    override suspend fun getMaterielByCode(code: String): Materiel {
-        return materielDao.getMaterielByCode(code).toDomain()
+    override suspend fun getMaterielByCode(code: String): Materiel? {
+        val materielEntity = materielDao.getMaterielByCode(code) ?: return null
+        return materielEntity.toDomain()
     }
 }
