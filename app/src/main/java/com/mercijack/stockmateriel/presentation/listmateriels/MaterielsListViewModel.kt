@@ -9,6 +9,7 @@ import com.mercijack.stockmateriel.framework.Interactors
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,8 +33,11 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
     }
 
     fun updateMaterielsList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _materielsList.postValue(interactors.getAllMateriels.invoke())
+        viewModelScope.launch {
+            val list = withContext(Dispatchers.IO) {
+                interactors.getAllMateriels.invoke()
+            }
+            _materielsList.postValue(list)
         }
     }
 
@@ -46,10 +50,17 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
     }
 
     fun onBtnRemoveClicked(materiel: Materiel) {
-        viewModelScope.launch(Dispatchers.IO) {
-            interactors.removeMateriel(materiel)
-            _materielsList.postValue(interactors.getAllMateriels.invoke())
-            _removeSuccess.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                interactors.removeMateriel(materiel)
+
+                val list = withContext(Dispatchers.IO) {
+                    interactors.getAllMateriels.invoke()
+                }
+
+                _materielsList.postValue(list)
+                _removeSuccess.postValue(true)
+            }
         }
     }
 

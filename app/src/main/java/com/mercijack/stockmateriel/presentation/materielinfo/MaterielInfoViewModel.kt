@@ -9,6 +9,7 @@ import com.mercijack.stockmateriel.framework.Interactors
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,11 +45,14 @@ class MaterielInfoViewModel @Inject constructor(private val interactors: Interac
     }
 
     fun onBtnRemoveClicked() {
-        viewModelScope.launch(Dispatchers.IO) {
-            materiel.value?.let {
-                interactors.removeMateriel(it)
-                _backToPrevious.postValue(true)
-                _removeSuccess.postValue(true)
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                materiel.value?.let {
+                    interactors.removeMateriel(it)
+
+                    _backToPrevious.postValue(true)
+                    _removeSuccess.postValue(true)
+                }
             }
         }
     }
