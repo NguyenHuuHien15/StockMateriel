@@ -11,7 +11,8 @@ import com.mercijack.stockmateriel.presentation.GenericRecyListAdapter
 import com.mercijack.stockmateriel.presentation.IDiffItemCallback
 import com.mercijack.stockmateriel.presentation.ITextSearchFilter
 
-class MaterielsListRecyAdapter(_context: Context, list: List<Materiel>?, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>) : GenericRecyListAdapter<Materiel>(_context, list, filter, diffCallback) {
+class MaterielsListRecyAdapter(_context: Context, list: List<Materiel>?, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>)
+    : GenericRecyListAdapter<Materiel>(_context, list, filter, diffCallback) {
 
     private lateinit var materielsListViewModel: MaterielsListViewModel
     private lateinit var lifecycleOwner: LifecycleOwner
@@ -20,6 +21,7 @@ class MaterielsListRecyAdapter(_context: Context, list: List<Materiel>?, filter:
         context: Context, list: List<Materiel>?, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>,
         materielsListViewModel: MaterielsListViewModel, lifecycleOwner: LifecycleOwner
     ) : this(context, list, filter, diffCallback) {
+
         this.materielsListViewModel = materielsListViewModel
         this.lifecycleOwner = lifecycleOwner
     }
@@ -34,15 +36,6 @@ class MaterielsListRecyAdapter(_context: Context, list: List<Materiel>?, filter:
         val holder = viewHolder as MyViewHolder
         val element: Materiel = currentList[position]
         holder.bind(materielsListViewModel, element)
-    }
-
-    fun getItemPosition(item: Materiel): Int {
-        for (itemForView in currentList) {
-            if (itemForView.code == item.code) {
-                return currentList.indexOf(itemForView)
-            }
-        }
-        return -1
     }
 
     inner class MyViewHolder(private val binding: MaterielItemRecylerviewBinding) : RecyclerView.ViewHolder(binding.root) {

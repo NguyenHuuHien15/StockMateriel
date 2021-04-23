@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -14,7 +15,30 @@
         android:layout_height="match_parent"
         android:background="@color/grey_light">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_search"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:hint="Recherche"
+            app:counterEnabled="false"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            app:helperText="Recherche par nom ou code"
+            app:helperTextEnabled="true"
+            app:startIconContentDescription="description"
+            app:startIconDrawable="@drawable/ic_search_black_20_0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tf_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/til_search"
             android:id="@+id/recy_all_items"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

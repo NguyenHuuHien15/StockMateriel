@@ -15,7 +15,7 @@ import javax.inject.Inject
 class MaterielsListViewModel @Inject constructor(private val interactors: Interactors) : ViewModel() {
     val LOG_TAG = MaterielsListViewModel::class.simpleName
 
-    val _materielsList: MutableLiveData<List<Materiel>> = MutableLiveData()
+    private val _materielsList: MutableLiveData<List<Materiel>> = MutableLiveData()
 
     val materielsList: LiveData<List<Materiel>> get() = _materielsList
 

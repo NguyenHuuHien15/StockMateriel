@@ -1,6 +1,8 @@
 package com.mercijack.stockmateriel.presentation.listmateriels
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +15,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mercijack.stockmateriel.databinding.FragmentMaterielsListBinding
-import com.mercijack.stockmateriel.domain.Materiel
-import com.mercijack.stockmateriel.presentation.IDiffItemCallback
-import com.mercijack.stockmateriel.presentation.ITextSearchFilter
 import com.mercijack.stockmateriel.presentation.MainActivity
 import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,25 +45,10 @@ class MaterielsListFragment : Fragment() {
 
         mainViewModel.setFullScreen(false)
 
-        adapter = MaterielsListRecyAdapter(requireContext(), viewModel.materielsList.value, object : ITextSearchFilter<Materiel> {
-            override fun shouldBeDisplayed(constraint: CharSequence?, obj: Materiel): Boolean {
-                if (constraint == null || constraint.isEmpty()) return true
-
-                val name = obj.name
-                if (name.isEmpty()) return true
-
-                val query = constraint.toString().toLowerCase()
-                return (name.toLowerCase().contains(query))
-            }
-        }, object : IDiffItemCallback<Materiel> {
-            override fun areItemsTheSame(oldItem: Materiel, newItem: Materiel): Boolean {
-                return oldItem.code == newItem.code
-            }
-
-            override fun areContentsTheSame(oldItem: Materiel, newItem: Materiel): Boolean {
-                return oldItem == newItem
-            }
-        }, viewModel, viewLifecycleOwner)
+        adapter = MaterielsListRecyAdapter(
+            requireContext(), viewModel.materielsList.value,
+            MaterielSearchFilter(), MaterielDiffCallback(), viewModel, viewLifecycleOwner
+        )
 
         val recyclerView = dataBinding.recyAllItems
         val mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
@@ -73,7 +57,7 @@ class MaterielsListFragment : Fragment() {
         recyclerView.adapter = adapter
 
         viewModel.materielsList.observe(viewLifecycleOwner, { allItems ->
-            adapter.submitList(allItems)
+            adapter.setList(allItems)
         })
 
         viewModel.clickedItem.observe(viewLifecycleOwner, {
@@ -88,7 +72,22 @@ class MaterielsListFragment : Fragment() {
         viewModel.updateMaterielsList()
 
         viewModel.removeSuccess.observe(viewLifecycleOwner, {
-            if(it == true) Toast.makeText(context, "Matériel retiré en succès", Toast.LENGTH_LONG).show()
+            if (it == true) Toast.makeText(context, "Matériel retiré en succès", Toast.LENGTH_LONG).show()
+        })
+
+        dataBinding.tfSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter.filter(s)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // do nothing
+            }
+
         })
 
     }
