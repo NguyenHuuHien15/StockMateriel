@@ -1,4 +1,4 @@
-package com.mercijack.stockmateriel.presentation.listmateriels
+package com.mercijack.stockmateriel.presentation
 
 import android.view.View
 import android.widget.ImageView
