@@ -26,6 +26,11 @@ class AddMaterielViewModel @Inject constructor(private val interactors: Interact
     }
     val name: LiveData<String> get() = _name
 
+    private val _addSuccess = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val addSuccess: LiveData<Boolean> get() = _addSuccess
+
     fun updateCode(newCode: String) {
         _code.value = newCode
     }
@@ -40,6 +45,7 @@ class AddMaterielViewModel @Inject constructor(private val interactors: Interact
             val nameValue = name.value.toString()
             Log.d(LOG_TAG, "Code = $codeValue, name = $nameValue")
             interactors.addMateriel(Materiel(codeValue, nameValue))
+            _addSuccess.value = true
         }
     }
 }
