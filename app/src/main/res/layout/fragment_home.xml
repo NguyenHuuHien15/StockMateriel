@@ -42,7 +42,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dp_16"
-                    android:text="10 matériels" />
+                    tools:text="10 matériels"
+                    app:number_materiels="@{viewModel.numberMateriels}" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -53,11 +54,11 @@
                     app:backgroundTint="@color/teal_700">
 
                     <com.google.android.material.button.MaterialButton
-                        android:onClick="@{() -> viewModel.onBtnViewListClicked()}"
                         style="@style/TextBlackBold20"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/blue_border"
+                        android:onClick="@{() -> viewModel.onBtnViewListClicked()}"
                         android:paddingStart="@dimen/dp_36"
                         android:paddingEnd="@dimen/dp_36"
                         android:text="Voir le stock"
@@ -67,12 +68,12 @@
                 </RelativeLayout>
 
                 <com.google.android.material.button.MaterialButton
-                    android:onClick="@{() -> viewModel.onBtnAddClicked()}"
                     style="@style/TextWhiteBold20"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_16"
                     android:background="@drawable/bacground_rounded_blue_green"
+                    android:onClick="@{() -> viewModel.onBtnAddClicked()}"
                     android:paddingStart="@dimen/dp_36"
                     android:paddingEnd="@dimen/dp_36"
                     android:text="Ajouter un matériel"
