@@ -10,4 +10,6 @@ interface IMaterielDataSource {
 
     suspend fun readAll(): List<Materiel>
 
+    suspend fun getMaterielByCode(code : String) : Materiel
+
 }

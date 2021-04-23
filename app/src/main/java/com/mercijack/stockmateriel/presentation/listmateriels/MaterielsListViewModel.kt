@@ -24,6 +24,10 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
 
     init {
         _clickedItem.value = null
+        updateMaterielsList()
+    }
+
+    fun updateMaterielsList() {
         viewModelScope.launch(Dispatchers.IO) {
             _materielsList.postValue(interactors.getAllMateriels.invoke())
         }

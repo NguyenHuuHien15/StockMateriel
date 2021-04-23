@@ -18,6 +18,10 @@ class RoomMaterielDataSource @Inject constructor(private val materielDao: Materi
     }
 
     override suspend fun readAll(): List<Materiel> {
-        return materielDao.getMateriels().map { Materiel(it.code, it.name) }
+        return materielDao.getMateriels().map { it.toDomain() }
+    }
+
+    override suspend fun getMaterielByCode(code: String): Materiel {
+        return materielDao.getMaterielByCode(code).toDomain()
     }
 }

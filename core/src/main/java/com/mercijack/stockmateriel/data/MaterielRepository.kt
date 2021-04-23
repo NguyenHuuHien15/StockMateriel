@@ -13,4 +13,6 @@ class MaterielRepository @Inject constructor(private val dataSource: IMaterielDa
 
     suspend fun getMateriels() = dataSource.readAll()
 
+    suspend fun getMaterielByCode(code: String) = dataSource.getMaterielByCode(code)
+
 }

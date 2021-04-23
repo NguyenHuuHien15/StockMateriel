@@ -1,14 +1,15 @@
 package com.mercijack.stockmateriel.presentation.listmateriels
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mercijack.stockmateriel.MainActivity
 import com.mercijack.stockmateriel.databinding.FragmentMaterielsListBinding
 import com.mercijack.stockmateriel.domain.Materiel
 import com.mercijack.stockmateriel.presentation.IDiffItemCallback
@@ -35,18 +36,16 @@ class MaterielsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.show()
-        actionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-        actionBar?.setCustomView(R.layout.custom_actionbar)
+        val mainActivity = activity as MainActivity
+        mainActivity.supportActionBar?.show()
+        mainActivity.displayBottomNav()
 
-        val window = activity?.window
+        val window = mainActivity.window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            //window?.insetsController?.show(WindowInsets.Type.statusBars())
-            window?.insetsController?.hide(WindowInsets.Type.statusBars())
+            window?.insetsController?.show(WindowInsets.Type.statusBars())
         } else {
-            window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        }*/
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
 
         adapter = MaterielsListRecyAdapter(requireContext(), viewModel.materielsList.value, object : ITextSearchFilter<Materiel> {
             override fun shouldBeDisplayed(constraint: CharSequence?, obj: Materiel): Boolean {
@@ -80,18 +79,13 @@ class MaterielsListFragment : Fragment() {
 
         viewModel.clickedItem.observe(viewLifecycleOwner, {
             it?.apply {
-                /*if (it.isVideo) {
-                    val action = ItemsCollectionFragmentDirections.actionItemsCollectionToPlayerVideo()
-                    action.urlVideo = it.url.toString()
-                    findNavController().navigate(action)
-                    viewModel.doneNavigating()
-                } else {
-                    val action = ItemsCollectionFragmentDirections.actionItemsCollectionToStoryDetails()
-                    action.itemId = it.id
-                    findNavController().navigate(action)
-                    viewModel.doneNavigating()
-                }*/
+                val action = MaterielsListFragmentDirections.actionMaterielsListToMaterielInfo()
+                action.code = it.code
+                findNavController().navigate(action)
+                viewModel.doneNavigating()
             }
         })
+
+        viewModel.updateMaterielsList()
     }
 }

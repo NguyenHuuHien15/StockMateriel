@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModelItem"
+            type="com.mercijack.stockmateriel.presentation.materielinfo.MaterielInfoViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_16"
+                android:translationZ="@dimen/dp_4">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_marginBottom="@dimen/dp_8">
+
+                    <ImageView
+                        android:id="@+id/imgv"
+                        android:layout_width="match_parent"
+                        android:layout_height="260dp"
+                        android:scaleType="centerCrop"
+                        app:item="@{viewModelItem.materiel}"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    style="@style/TextBlackBold24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@{viewModelItem.materiel.name}"
+                    tools:text="Name" />
+
+                <TextView
+                    android:id="@+id/tv_author"
+                    style="@style/Text16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@{viewModelItem.materiel.code}"
+                    tools:text="Code" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/img_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/dp_8"
+            android:background="@drawable/bg_circle"
+            android:onClick="@{() -> viewModelItem.onBackClicked()}"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_back_black_20_0"
+            android:translationZ="@dimen/dp_8" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/dp_8"
+            android:background="@drawable/bg_circle"
+            android:onClick="@{() -> viewModelItem.onBtnRemoveClicked()}"
+            android:padding="@dimen/dp_8"
+            android:src="@drawable/ic_delete_black_20_0"
+            android:translationZ="@dimen/dp_8" />
+
+    </RelativeLayout>
+
+</layout>
+

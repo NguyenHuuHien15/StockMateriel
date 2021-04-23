@@ -14,4 +14,7 @@ interface MaterielDao {
     @Query("SELECT * FROM materiel_entity_table")
     fun getMateriels(): List<MaterielEntity>
 
+    @Query("SELECT * FROM materiel_entity_table WHERE code = :key")
+    suspend fun getMaterielByCode(key: String): MaterielEntity
+
 }

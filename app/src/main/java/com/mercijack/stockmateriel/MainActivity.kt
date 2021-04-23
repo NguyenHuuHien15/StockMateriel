@@ -2,6 +2,7 @@ package com.mercijack.stockmateriel
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import com.mercijack.stockmateriel.databinding.ActivityMainBinding
@@ -33,9 +34,21 @@ class MainActivity : AppCompatActivity() {
         dataBinding.navView.selectedItemId = R.id.navigation_home
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.top_app_bar, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    fun displayBottomNav() {
+        dataBinding.navView.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNav() {
+        dataBinding.navView.visibility = View.GONE
     }
 
 }
