@@ -80,6 +80,28 @@
                     android:textAllCaps="false"
                     app:backgroundTint="@color/teal_700" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_16"
+                    android:background="@drawable/blue_border"
+                    android:padding="1dp"
+                    app:backgroundTint="@color/teal_700">
+
+                    <com.google.android.material.button.MaterialButton
+                        style="@style/TextBlackBold20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_border"
+                        android:onClick="@{() -> viewModel.onBtnViewListClicked()}"
+                        android:paddingStart="@dimen/dp_36"
+                        android:paddingEnd="@dimen/dp_36"
+                        android:text="Retirer un matériel"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/white" />
+
+                </RelativeLayout>
+
             </LinearLayout>
         </ScrollView>
 

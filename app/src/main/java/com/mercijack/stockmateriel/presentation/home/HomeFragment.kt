@@ -11,7 +11,6 @@ import com.mercijack.stockmateriel.R
 import com.mercijack.stockmateriel.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
