@@ -4,9 +4,10 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions.*
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
 import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -144,4 +145,34 @@ class AppTest {
         onView(withId(R.id.img_btn_remove)).check(matches(isDisplayed()))
 
     }
+
+    @Test
+    fun removeMaterielFromInfoScreen() {
+        ActivityScenario.launch(MainActivity::class.java)
+
+        // 1. Add a materiel
+        onView(withId(R.id.btn_add)).perform(click())
+        addMateriel1()
+
+        // 2. On home screen, add an other materiel
+        onView(withId(R.id.btn_add)).perform(click())
+        addMateriel2()
+
+        // 3. View list
+        onView(withId(R.id.btn_view_stock)).perform(click())
+        onView(withId(R.id.recy_all_items)).perform(actionOnItem<RecyclerView.ViewHolder>(hasDescendant(withText("m1")), click()))
+
+        // 4. On materiel info screen, click btn remove
+        onView(withId(R.id.img_btn_remove)).perform(click())
+
+        // 5. On list screen, back
+        onView(withId(R.id.recy_all_items)).check(matches(isDisplayed()))
+        onView(withId(R.id.recy_all_items)).check(matches(atPosition(0, hasDescendant(withText("m2")))))
+        onView(withId(R.id.recy_all_items)).check(matches(atPosition(0, hasDescendant(withText("c2")))))
+        pressBack()
+
+        // 6. On home screen
+        onView(withId(R.id.mtv_number_materiels)).check(matches(withText("1 matériel")))
+    }
+
 }
