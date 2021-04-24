@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.mercijack.stockmateriel.databinding.FragmentMaterielInfoBinding
-import com.mercijack.stockmateriel.presentation.MainActivity
 import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,8 +32,7 @@ class MaterielInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.title = "Info du matériel"
+        activity?.title = "Info du matériel"
 
         mainViewModel.setFullScreen(true)
         mainViewModel.setOnHomeFragment(false)
@@ -49,7 +47,7 @@ class MaterielInfoFragment : Fragment() {
         })
 
         viewModel.removeSuccess.observe(viewLifecycleOwner, {
-            if(it == true) Toast.makeText(context, "Matériel retiré en succès", Toast.LENGTH_LONG).show()
+            if (it == true) Toast.makeText(context, "Matériel retiré en succès", Toast.LENGTH_LONG).show()
         })
     }
 

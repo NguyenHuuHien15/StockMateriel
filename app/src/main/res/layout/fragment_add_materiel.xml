@@ -44,7 +44,7 @@
                     app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tf_name"
+                        android:id="@+id/et_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -65,7 +65,7 @@
                     app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tf_code"
+                        android:id="@+id/et_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 

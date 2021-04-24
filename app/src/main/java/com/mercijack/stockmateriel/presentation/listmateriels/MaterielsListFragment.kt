@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mercijack.stockmateriel.databinding.FragmentMaterielsListBinding
-import com.mercijack.stockmateriel.presentation.MainActivity
 import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,8 +39,7 @@ class MaterielsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val mainActivity = activity as MainActivity
-        mainActivity.title = "Liste des matériels"
+        activity?.title = "Liste des matériels"
 
         mainViewModel.setFullScreen(false)
         mainViewModel.setOnHomeFragment(false)

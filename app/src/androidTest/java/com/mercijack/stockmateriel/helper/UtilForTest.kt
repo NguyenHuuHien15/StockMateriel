@@ -42,10 +42,8 @@ fun addMateriel3SameCodeWithMateriel2() {
 
 private fun addMateriel(name: String, code: String) {
     // On add materiel screen
-    onView(withId(R.id.tf_name))
-        .perform(ViewActions.typeText(name), ViewActions.closeSoftKeyboard())
-    onView(withId(R.id.tf_code))
-        .perform(ViewActions.typeText(code), ViewActions.closeSoftKeyboard())
+    onView(withId(R.id.et_name)).perform(ViewActions.typeText(name), ViewActions.closeSoftKeyboard())
+    onView(withId(R.id.et_code)).perform(ViewActions.typeText(code), ViewActions.closeSoftKeyboard())
     // Click add to add materiel
     onView(withId(R.id.btn_add)).perform(click())
 }

@@ -37,7 +37,7 @@ class AddMaterielFragment : Fragment() {
         mainViewModel.setFullScreen(false)
         mainViewModel.setOnHomeFragment(false)
 
-        dataBinding.tfCode.addTextChangedListener(object : TextWatcher {
+        dataBinding.etCode.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
             }
@@ -52,7 +52,7 @@ class AddMaterielFragment : Fragment() {
 
         })
 
-        dataBinding.tfName.addTextChangedListener(object : TextWatcher {
+        dataBinding.etName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 // do nothing
             }
