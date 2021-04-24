@@ -12,6 +12,10 @@ import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.mercijack.stockmateriel.helper.addMateriel1
+import com.mercijack.stockmateriel.helper.addMateriel2
+import com.mercijack.stockmateriel.helper.addMateriel3SameCodeWithMateriel2
+import com.mercijack.stockmateriel.helper.atPosition
 import com.mercijack.stockmateriel.presentation.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

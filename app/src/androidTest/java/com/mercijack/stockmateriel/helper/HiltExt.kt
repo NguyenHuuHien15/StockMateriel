@@ -1,4 +1,4 @@
-package com.mercijack.stockmateriel
+package com.mercijack.stockmateriel.helper
 
 import android.content.ComponentName
 import android.content.Intent
@@ -8,6 +8,8 @@ import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import com.mercijack.stockmateriel.HiltTestActivity
+import com.mercijack.stockmateriel.R
 
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentArgs: Bundle? = null,

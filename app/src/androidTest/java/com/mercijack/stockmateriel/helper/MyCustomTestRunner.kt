@@ -1,4 +1,4 @@
-package com.mercijack.stockmateriel
+package com.mercijack.stockmateriel.helper
 
 import android.app.Application
 import android.content.Context

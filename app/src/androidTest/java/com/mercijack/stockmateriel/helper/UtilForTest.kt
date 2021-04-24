@@ -1,4 +1,4 @@
-package com.mercijack.stockmateriel
+package com.mercijack.stockmateriel.helper
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -7,6 +7,7 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import com.mercijack.stockmateriel.R
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 
