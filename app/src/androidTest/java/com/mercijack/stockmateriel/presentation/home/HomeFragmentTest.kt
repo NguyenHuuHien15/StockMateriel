@@ -5,9 +5,9 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mercijack.stockmateriel.R
 import com.mercijack.stockmateriel.launchFragmentInHiltContainer
@@ -48,8 +48,8 @@ class HomeFragmentTest {
             Navigation.setViewNavController(this.view!!, navController)
         }
 
-        onView(withId(R.id.mtv_title)).check(ViewAssertions.matches(ViewMatchers.withText("Mon stock")))
-        onView(withId(R.id.mtv_number_materiels)).check(ViewAssertions.matches(ViewMatchers.withText("Vide")))
+        onView(withId(R.id.mtv_title)).check(matches(withText("Mon stock")))
+        onView(withId(R.id.mtv_number_materiels)).check(matches(withText("Vide")))
 
         // WHEN - Click on the "add" button
         onView(withId(R.id.btn_add)).perform(click())

@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.mercijack.stockmateriel.R
 import com.mercijack.stockmateriel.databinding.FragmentAddMaterielBinding
 import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,13 +69,13 @@ class AddMaterielFragment : Fragment() {
 
         viewModel.addSuccess.observe(viewLifecycleOwner, {
             if (it == true) {
-                Toast.makeText(context, "Matériel ajouté en succès", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.add_materiel_success), Toast.LENGTH_LONG).show()
                 activity?.onBackPressed()
             }
         })
 
         viewModel.isMaterielExistedInDb.observe(viewLifecycleOwner, {
-            if (it == true) Toast.makeText(context, "Le code existant, matériel n'est pas ajouté", Toast.LENGTH_LONG).show()
+            if (it == true) Toast.makeText(context, getString(R.string.code_existed_materiel_not_added), Toast.LENGTH_LONG).show()
         })
     }
 }

@@ -13,6 +13,7 @@ import org.junit.runners.Suite
     MaterielDaoTest::class,
     AppContextTest::class,
     HomeFragmentTest::class,
+    AppTest::class,
 )
 // @formatter:on
 class AllInstrumentedTests {
