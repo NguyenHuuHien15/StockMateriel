@@ -44,6 +44,7 @@ class MaterielsListFragment : Fragment() {
         mainActivity.title = "Liste des matériels"
 
         mainViewModel.setFullScreen(false)
+        mainViewModel.setOnHomeFragment(false)
 
         adapter = MaterielsListRecyAdapter(
             requireContext(), viewModel.materielsList.value,

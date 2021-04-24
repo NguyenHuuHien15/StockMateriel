@@ -25,6 +25,7 @@ class MaterielInfoFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         dataBinding = FragmentMaterielInfoBinding.inflate(layoutInflater, container, false)
         dataBinding.lifecycleOwner = viewLifecycleOwner
+
         dataBinding.viewModelItem = viewModel
         return dataBinding.root
     }
@@ -36,6 +37,7 @@ class MaterielInfoFragment : Fragment() {
         mainActivity.title = "Info du matériel"
 
         mainViewModel.setFullScreen(true)
+        mainViewModel.setOnHomeFragment(false)
 
         viewModel.setMaterielCode(MaterielInfoFragmentArgs.fromBundle(requireArguments()).code)
 

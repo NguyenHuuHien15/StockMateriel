@@ -15,8 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    var _dataBinding: ActivityMainBinding? = null
-    val dataBinding get() = _dataBinding!!
+    private var _dataBinding: ActivityMainBinding? = null
+    private val dataBinding get() = _dataBinding!!
     private val viewModel: MainViewModel by viewModels()
 
     private val navController by lazy {
@@ -41,8 +41,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.isFullScreen.observe(this, {
-            if(it == true) doFullScreen() else exitFullScreen()
+            if (it == true) doFullScreen() else exitFullScreen()
         })
+
+        viewModel.onHomeFragment.observe(this, {
+            if (it == true) {
+                dataBinding.toolbar.navigationIcon = null // no icon
+                dataBinding.navView.menu.setGroupCheckable(0, true, true)
+            } else {
+                dataBinding.toolbar.setNavigationIcon(R.drawable.ic_action_arrow_back)
+                dataBinding.navView.menu.setGroupCheckable(0, false, true)
+            }
+        })
+
+        dataBinding.toolbar.setNavigationOnClickListener {
+            if (!viewModel.onHomeFragment.value!!) {
+                onBackPressed()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

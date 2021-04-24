@@ -8,15 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.mercijack.stockmateriel.databinding.FragmentAddMaterielBinding
+import com.mercijack.stockmateriel.presentation.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddMaterielFragment : Fragment() {
 
-    private val viewModel: AddMaterielViewModel by viewModels()
     private lateinit var dataBinding: FragmentAddMaterielBinding
+
+    private val viewModel: AddMaterielViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         dataBinding = FragmentAddMaterielBinding.inflate(layoutInflater, container, false)
@@ -28,6 +32,9 @@ class AddMaterielFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Rajoute d'un matériel"
+
+        mainViewModel.setFullScreen(false)
+        mainViewModel.setOnHomeFragment(false)
 
         dataBinding.tfCode.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
