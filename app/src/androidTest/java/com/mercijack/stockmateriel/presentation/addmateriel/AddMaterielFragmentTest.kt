@@ -1,20 +1,25 @@
 package com.mercijack.stockmateriel.presentation.addmateriel
 
 import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mercijack.stockmateriel.R
 import com.mercijack.stockmateriel.helper.addMateriel1
 import com.mercijack.stockmateriel.helper.launchFragmentInHiltContainer
+import com.mercijack.stockmateriel.presentation.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.Matchers.not
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,16 +31,28 @@ import org.mockito.Mockito.mock
 @HiltAndroidTest
 
 class AddMaterielFragmentTest {
-    @get:Rule
-    var rule = HiltAndroidRule(this)
+
+    @get:Rule(order = 0)
+    var hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    var activityScenarioRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
+
+    private var decorView: View? = null
 
     @Before
     fun setUp() {
-        rule.inject()
+        hiltRule.inject()
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            if (activity != null) {
+                decorView = activity.window.decorView
+            }
+        }
     }
 
     @Test
-    fun clickAddBtn_back_HomeFragment() {
+    fun click_AddBtnSuccess_finish_Fragment() {
         // GIVEN - On the home screen
         val navController = mock(NavController::class.java)
 
@@ -49,5 +66,7 @@ class AddMaterielFragmentTest {
 
         // THEN - Fullfill name and code and click on the "add" button
         addMateriel1()
+
+        assertEquals(Lifecycle.State.DESTROYED, activityScenarioRule.scenario.state)
     }
 }
