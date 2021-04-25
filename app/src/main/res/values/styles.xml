@@ -16,6 +16,10 @@
         <item name="android:textSize">@dimen/sp_14</item>
     </style>
 
+    <style name="TextBlack20" parent="TextBlack">
+        <item name="android:textSize">@dimen/sp_20</item>
+    </style>
+
     <style name="TextBlackBold" parent="TextBlack">
         <item name="android:textStyle">bold</item>
     </style>

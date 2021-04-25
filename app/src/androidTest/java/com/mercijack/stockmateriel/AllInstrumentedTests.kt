@@ -35,5 +35,4 @@ import org.junit.runners.Suite
     MainActivityTest::class,
 )
 // @formatter:on
-class AllInstrumentedTests {
-}
+class AllInstrumentedTests

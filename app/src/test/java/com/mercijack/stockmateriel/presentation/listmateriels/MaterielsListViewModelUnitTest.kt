@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class MaterielsListViewModelTest {
+class MaterielsListViewModelUnitTest {
 
     @get:Rule(order = 0)
     var instantExecutorRule = InstantTaskExecutorRule()
