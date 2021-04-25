@@ -129,11 +129,11 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:3.14.2"
 
     // For Robolectric tests.
-    testImplementation 'com.google.dagger:hilt-android-testing:2.33-beta'
-    testImplementation 'org.robolectric:robolectric:4.3.1'
-    kaptTest 'com.google.dagger:hilt-android-compiler:2.33-beta'
+    //testImplementation 'com.google.dagger:hilt-android-testing:2.33-beta'
+    //testImplementation 'org.robolectric:robolectric:4.3.1'
+    //kaptTest 'com.google.dagger:hilt-android-compiler:2.33-beta'
 
-    testImplementation "com.squareup.okhttp3:mockwebserver:3.14.2"
+    //testImplementation "com.squareup.okhttp3:mockwebserver:3.14.2"
 
     implementation 'org.apache.commons:commons-lang3:3.9'
 

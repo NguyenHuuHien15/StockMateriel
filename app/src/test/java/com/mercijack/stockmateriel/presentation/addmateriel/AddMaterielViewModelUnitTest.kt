@@ -1,18 +1,18 @@
-package com.mercijack.stockmateriel.presentation.listmateriels
+package com.mercijack.stockmateriel.presentation.addmateriel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.mercijack.stockmateriel.LiveDataTestUtil
 import com.mercijack.stockmateriel.MainCoroutineRule
 import com.mercijack.stockmateriel.framework.Interactors
 import com.mercijack.stockmateriel.materiel1
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito.mock
 
-class MaterielsListViewModelTest {
+class AddMaterielViewModelUnitTest {
 
     @get:Rule(order = 0)
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -21,26 +21,26 @@ class MaterielsListViewModelTest {
     @get:Rule(order = 1)
     val coroutineRule = MainCoroutineRule()
 
-    private lateinit var viewModel: MaterielsListViewModel
+    private lateinit var viewModel: AddMaterielViewModel
     private lateinit var interactors: Interactors
 
     @ExperimentalCoroutinesApi
     @Before
     fun setup() {
-        interactors = mockk()
-        viewModel = MaterielsListViewModel(interactors)
+        interactors = mock(Interactors::class.java)
+        viewModel = AddMaterielViewModel(interactors)
     }
 
     @Test
-    fun onItemClicked() {
-        viewModel.onItemClicked(materiel1)
-        assertEquals(materiel1, LiveDataTestUtil.getValue(viewModel.clickedItem))
+    fun updateCode() {
+        viewModel.updateCode(materiel1.code)
+        assertEquals(materiel1.code, LiveDataTestUtil.getValue(viewModel.code))
     }
 
     @Test
-    fun doneNavigating() {
-        viewModel.doneNavigating()
-        assertEquals(null, LiveDataTestUtil.getValue(viewModel.clickedItem))
+    fun updateName() {
+        viewModel.updateName(materiel1.name)
+        assertEquals(materiel1.name, LiveDataTestUtil.getValue(viewModel.name))
     }
 
 }

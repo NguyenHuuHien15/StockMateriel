@@ -2,14 +2,49 @@ package com.mercijack.stockmateriel.helper
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.BoundedMatcher
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.mercijack.stockmateriel.R
+import com.mercijack.stockmateriel.data.MaterielRepository
+import com.mercijack.stockmateriel.framework.Interactors
+import com.mercijack.stockmateriel.framework.RoomMaterielDataSource
+import com.mercijack.stockmateriel.framework.db.MaterielDao
+import com.mercijack.stockmateriel.framework.db.MaterielDatabase
+import com.mercijack.stockmateriel.interactors.AddMateriel
+import com.mercijack.stockmateriel.interactors.GetAllMateriels
+import com.mercijack.stockmateriel.interactors.GetMaterielByCode
+import com.mercijack.stockmateriel.interactors.RemoveMateriel
 import org.hamcrest.Description
 import org.hamcrest.Matcher
+
+lateinit var materielDao: MaterielDao
+lateinit var db: MaterielDatabase
+lateinit var interactors: Interactors
+lateinit var addMateriel: AddMateriel
+lateinit var removeMateriel: RemoveMateriel
+lateinit var getAllMateriels: GetAllMateriels
+lateinit var getMaterielByCode: GetMaterielByCode
+lateinit var materielRepository: MaterielRepository
+lateinit var roomMaterielDataSource: RoomMaterielDataSource
+
+fun setUpInteractors() {
+    db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), MaterielDatabase::class.java)
+        .allowMainThreadQueries()
+        .build()
+    materielDao = db.materielDao
+    roomMaterielDataSource = RoomMaterielDataSource(materielDao)
+    materielRepository = MaterielRepository(roomMaterielDataSource)
+    addMateriel = AddMateriel(materielRepository)
+    removeMateriel = RemoveMateriel(materielRepository)
+    getAllMateriels = GetAllMateriels(materielRepository)
+    getMaterielByCode = GetMaterielByCode(materielRepository)
+    interactors = Interactors(addMateriel, removeMateriel, getAllMateriels, getMaterielByCode)
+}
 
 fun atPosition(position: Int, itemMatcher: Matcher<View?>): Matcher<View?> {
     checkNotNull(itemMatcher)
