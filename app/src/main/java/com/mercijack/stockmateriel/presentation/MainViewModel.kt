@@ -14,14 +14,14 @@ class MainViewModel @Inject constructor() : ViewModel() {
     }
     val isFullScreen: LiveData<Boolean> = _isFullScreen
 
-    fun setFullScreen(value: Boolean) {
-        _isFullScreen.value = value
-    }
-
     private val _onHomeFragment = MutableLiveData<Boolean>().apply {
         value = true
     }
     val onHomeFragment: LiveData<Boolean> = _onHomeFragment
+
+    fun setFullScreen(value: Boolean) {
+        _isFullScreen.value = value
+    }
 
     fun setOnHomeFragment(value: Boolean) {
         _onHomeFragment.value = value
