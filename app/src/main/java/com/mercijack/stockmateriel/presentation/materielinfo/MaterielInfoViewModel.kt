@@ -45,15 +45,14 @@ class MaterielInfoViewModel @Inject constructor(private val interactors: Interac
     }
 
     fun onBtnRemoveClicked() {
+        if(materiel.value == null) return
+
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                materiel.value?.let {
-                    interactors.removeMateriel(it)
-
-                    _backToPrevious.postValue(true)
-                    _removeSuccess.postValue(true)
-                }
+                interactors.removeMateriel(materiel.value!!)
             }
+            _backToPrevious.postValue(true)
+            _removeSuccess.postValue(true)
         }
     }
 

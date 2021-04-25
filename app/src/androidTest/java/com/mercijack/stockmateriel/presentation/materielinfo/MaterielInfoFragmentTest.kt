@@ -1,17 +1,16 @@
-package com.mercijack.stockmateriel.presentation.listmateriels
+package com.mercijack.stockmateriel.presentation.materielinfo
+
 
 import android.content.Context
 import android.os.Bundle
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mercijack.stockmateriel.R
@@ -19,7 +18,6 @@ import com.mercijack.stockmateriel.framework.db.MaterielDao
 import com.mercijack.stockmateriel.framework.db.MaterielDatabase
 import com.mercijack.stockmateriel.framework.db.RoomModule
 import com.mercijack.stockmateriel.helper.launchFragmentInHiltContainer
-import com.mercijack.stockmateriel.materiel1
 import com.mercijack.stockmateriel.materielEntity1
 import com.mercijack.stockmateriel.materielEntity2
 import dagger.Module
@@ -32,13 +30,13 @@ import dagger.hilt.android.testing.UninstallModules
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.verify
 import javax.inject.Singleton
 
 @ExperimentalCoroutinesApi
@@ -47,7 +45,7 @@ import javax.inject.Singleton
 )
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
-class MaterielsListFragmentTest {
+class MaterielInfoFragmentTest {
 
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
@@ -89,7 +87,7 @@ class MaterielsListFragmentTest {
     }
 
     @Test
-    fun click_AMateriel_navigateTo_MaterielInfoFragment() {
+    fun view_MaterielInfo_click_BackBtn_finish_Fragment() {
         // Prepare: Write 2 materiels in db
         runBlocking {
             materielDao.addMateriel(materielEntity1)
@@ -99,19 +97,42 @@ class MaterielsListFragmentTest {
         // GIVEN - On the stock screen
         val navController = mock(NavController::class.java)
 
-        launchFragmentInHiltContainer<MaterielsListFragment>(Bundle(), R.style.Theme_StockMateriel) {
+        val inputBundle = Bundle()
+        inputBundle.putString("code", materielEntity1.code)
+        val bundle = MaterielInfoFragmentArgs.fromBundle(inputBundle).toBundle()
+
+        launchFragmentInHiltContainer<MaterielInfoFragment>(bundle, R.style.Theme_StockMateriel) {
             Navigation.setViewNavController(this.view!!, navController)
         }
 
-        onView(withId(R.id.recy_all_items)).check(matches(isDisplayed()))
+        onView(withId(R.id.img_btn_back)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_name)).check(matches(withText("m1")))
+        onView(withId(R.id.tv_code)).check(matches(withText("c1")))
 
-        // WHEN - Click on a materiel
-        onView(withId(R.id.recy_all_items)).perform(RecyclerViewActions.actionOnItem<RecyclerView.ViewHolder>(hasDescendant(withText("m1")), click()))
+        onView(withId(R.id.img_btn_back)).perform(click())
+    }
 
-        // THEN - Verify that we navigate to materiel add screen
-        val action = MaterielsListFragmentDirections.actionMaterielsListToMaterielInfo()
-        action.code = materiel1.code
-        verify(navController).navigate(action)
+    @Test
+    fun view_MaterielInfo_click_RemoveBtn_finish_Fragment() = runBlockingTest {
+        // Prepare: Write 2 materiels in db
+        materielDao.addMateriel(materielEntity1)
+        materielDao.addMateriel(materielEntity2)
+
+        val navController = mock(NavController::class.java)
+
+        val inputBundle = Bundle()
+        inputBundle.putString("code", materielEntity1.code)
+        val bundle = MaterielInfoFragmentArgs.fromBundle(inputBundle).toBundle()
+
+        launchFragmentInHiltContainer<MaterielInfoFragment>(bundle, R.style.Theme_StockMateriel) {
+            Navigation.setViewNavController(this.view!!, navController)
+        }
+
+        onView(withId(R.id.img_btn_remove)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_name)).check(matches(withText("m1")))
+        onView(withId(R.id.tv_code)).check(matches(withText("c1")))
+
+        onView(withId(R.id.img_btn_remove)).perform(click())
     }
 
 }
