@@ -1,4 +1,4 @@
-package com.mercijack.stockmateriel
+package com.mercijack.stockmateriel.presentation
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +13,11 @@ import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.mercijack.stockmateriel.R
 import com.mercijack.stockmateriel.helper.addMateriel1
 import com.mercijack.stockmateriel.helper.addMateriel2
 import com.mercijack.stockmateriel.helper.addMateriel3SameCodeWithMateriel2
 import com.mercijack.stockmateriel.helper.atPosition
-import com.mercijack.stockmateriel.presentation.MainActivity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,7 +30,7 @@ import org.junit.runner.RunWith
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
-class AppTest {
+class MainActivityTest {
 
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
@@ -95,7 +95,6 @@ class AppTest {
         onView(withText(R.string.code_existed_materiel_not_added))
             .inRoot(RootMatchers.withDecorView(Matchers.not(decorView)))
             .check(matches(isDisplayed()))
-
     }
 
     @Test
@@ -119,7 +118,6 @@ class AppTest {
         onView(withId(R.id.recy_all_items)).perform(scrollToPosition<RecyclerView.ViewHolder>(1))
         onView(withId(R.id.recy_all_items)).check(matches(atPosition(1, hasDescendant(withText("m2")))))
         onView(withId(R.id.recy_all_items)).check(matches(atPosition(1, hasDescendant(withText("c2")))))
-
     }
 
     @Test
@@ -143,7 +141,6 @@ class AppTest {
         onView(withId(R.id.tv_code)).check(matches(withText("c1")))
         onView(withId(R.id.img_btn_back)).check(matches(isDisplayed()))
         onView(withId(R.id.img_btn_remove)).check(matches(isDisplayed()))
-
     }
 
     @Test
@@ -162,7 +159,7 @@ class AppTest {
         onView(withId(R.id.btn_view_stock)).perform(click())
         onView(withId(R.id.recy_all_items)).perform(actionOnItem<RecyclerView.ViewHolder>(hasDescendant(withText("m1")), click()))
 
-        // 4. On materiel info screen, click btn remove
+        // 4. On materiel info screen, click btn remove materiel 1
         onView(withId(R.id.img_btn_remove)).perform(click())
 
         // 5. On list screen, back

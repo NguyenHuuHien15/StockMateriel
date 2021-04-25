@@ -1,6 +1,7 @@
 package com.mercijack.stockmateriel
 
 import com.mercijack.stockmateriel.framework.db.MaterielDaoTest
+import com.mercijack.stockmateriel.presentation.MainActivityTest
 import com.mercijack.stockmateriel.presentation.addmateriel.AddMaterielFragmentTest
 import com.mercijack.stockmateriel.presentation.home.HomeFragmentTest
 import com.mercijack.stockmateriel.presentation.listmateriels.MaterielsListFragmentTest
@@ -19,7 +20,7 @@ import org.junit.runners.Suite
     AddMaterielFragmentTest::class,
     MaterielsListFragmentTest::class,
     MaterielInfoFragmentTest::class,
-    AppTest::class,
+    MainActivityTest::class,
 )
 // @formatter:on
 class AllInstrumentedTests {
