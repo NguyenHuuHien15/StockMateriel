@@ -2,16 +2,13 @@ package com.mercijack.stockmateriel.presentation.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.mercijack.stockmateriel.LiveDataTestUtil
+import com.mercijack.stockmateriel.MainCoroutineRule
 import com.mercijack.stockmateriel.framework.Interactors
 import com.mercijack.stockmateriel.interactors.GetAllMateriels
 import com.mercijack.stockmateriel.materiel1
 import com.mercijack.stockmateriel.materiel2
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.After
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -21,8 +18,12 @@ import org.mockito.Mockito.`when` as whenever
 
 class HomeViewModelTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
     var instantExecutorRule = InstantTaskExecutorRule()
+
+    @ExperimentalCoroutinesApi
+    @get:Rule(order = 1)
+    val coroutineRule = MainCoroutineRule()
 
     private lateinit var viewModel: HomeViewModel
     private lateinit var interactors: Interactors
@@ -31,38 +32,29 @@ class HomeViewModelTest {
     @ExperimentalCoroutinesApi
     @Before
     fun setup() {
-        Dispatchers.setMain(Dispatchers.Unconfined)
         interactors = mock(Interactors::class.java)
         getAllMateriels = mock(GetAllMateriels::class.java)
         viewModel = HomeViewModel(interactors)
     }
 
     @ExperimentalCoroutinesApi
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
+    @Test
+    fun updateNumberMateriels() = runBlockingTest {
+        whenever(getAllMateriels.invoke()).thenReturn(listOf())
+        whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
+
+        viewModel.updateNumberMateriels()
+        assertEquals(0, LiveDataTestUtil.getValue(viewModel.numberMateriels))
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun updateNumberMateriels() {
-        runBlocking {
-            whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
-            whenever(getAllMateriels.invoke()).thenReturn(emptyList())
-            viewModel.updateNumberMateriels()
-            assertEquals(0, LiveDataTestUtil.getValue(viewModel.numberMateriels))
-        }
-    }
+    fun updateNumberMateriels2() = runBlockingTest {
+        whenever(getAllMateriels.invoke()).thenReturn(listOf(materiel1, materiel2))
+        whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
 
-    @ExperimentalCoroutinesApi
-    @Test
-    fun updateNumberMateriels2() {
-        runBlocking {
-            whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
-            whenever(getAllMateriels.invoke()).thenReturn(listOf(materiel1, materiel2))
-            viewModel.updateNumberMateriels()
-            assertEquals(2, LiveDataTestUtil.getValue(viewModel.numberMateriels))
-        }
+        viewModel.updateNumberMateriels()
+        assertEquals(2, LiveDataTestUtil.getValue(viewModel.numberMateriels))
     }
 
     @Test
