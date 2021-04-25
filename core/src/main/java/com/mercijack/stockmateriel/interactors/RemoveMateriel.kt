@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class RemoveMateriel @Inject constructor(private val materielRepo: MaterielRepository) {
 
-    suspend operator fun invoke(materiel: Materiel) = materielRepo.removeMateriel(materiel)
+    suspend operator fun invoke(materiel: Materiel?) = materielRepo.removeMateriel(materiel)
 
 }

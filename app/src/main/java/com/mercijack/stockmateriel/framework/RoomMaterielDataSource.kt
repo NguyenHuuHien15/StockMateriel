@@ -13,8 +13,10 @@ class RoomMaterielDataSource @Inject constructor(private val materielDao: Materi
         materielDao.addMateriel(MaterielEntity(materiel.code, materiel.name))
     }
 
-    override suspend fun remove(materiel: Materiel) {
-        materielDao.removeMateriel(MaterielEntity(materiel.code, materiel.name))
+    override suspend fun remove(materiel: Materiel?) {
+        materiel?.let {
+            materielDao.removeMateriel(MaterielEntity(materiel.code, materiel.name))
+        }
     }
 
     override suspend fun readAll(): List<Materiel> {
