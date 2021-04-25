@@ -41,7 +41,7 @@
                     app:helperText="Nom du matériel"
                     app:helperTextEnabled="true"
                     app:startIconContentDescription="description"
-                    app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
+                    app:startIconDrawable="@drawable/ic_label_black_20_0">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_name"
@@ -62,7 +62,7 @@
                     app:helperText="Code du matériel"
                     app:helperTextEnabled="true"
                     app:startIconContentDescription="description"
-                    app:startIconDrawable="@drawable/ic_dashboard_black_24dp">
+                    app:startIconDrawable="@drawable/ic_code_black_20_0">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_code"
