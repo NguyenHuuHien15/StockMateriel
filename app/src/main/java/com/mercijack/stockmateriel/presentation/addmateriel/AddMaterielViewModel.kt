@@ -50,12 +50,13 @@ class AddMaterielViewModel @Inject constructor(private val interactors: Interact
             val nameValue = name.value.toString()
             val materielFromDb = interactors.getMaterielByCode.invoke(codeValue)
             val isMaterielExisted = materielFromDb != null
-            Log.d(LOG_TAG, "Code = $codeValue, name = $nameValue, existed = $isMaterielExisted")
+            //Log.d(LOG_TAG, "Code = $codeValue, name = $nameValue, existed = $isMaterielExisted")
             if (isMaterielExisted) {
                 _isMaterielExistedInDb.value = true
             } else {
                 interactors.addMateriel(Materiel(codeValue, nameValue))
                 _addSuccess.value = true
+                _isMaterielExistedInDb.value = false
             }
         }
     }

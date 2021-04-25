@@ -2,6 +2,7 @@ package com.mercijack.stockmateriel;
 
 import com.mercijack.stockmateriel.framework.db.MaterielEntityTest;
 import com.mercijack.stockmateriel.presentation.MainViewModelTest;
+import com.mercijack.stockmateriel.presentation.addmateriel.AddMaterielViewModelTest;
 import com.mercijack.stockmateriel.presentation.home.HomeViewModelTest;
 import com.mercijack.stockmateriel.presentation.listmateriels.MaterielSearchFilterTest;
 
@@ -16,6 +17,7 @@ import org.junit.runners.Suite;
         MaterielSearchFilterTest.class,
         MainViewModelTest.class,
         HomeViewModelTest.class,
+        AddMaterielViewModelTest.class,
 })
 // @formatter:on
 public class AllUnitTests {
