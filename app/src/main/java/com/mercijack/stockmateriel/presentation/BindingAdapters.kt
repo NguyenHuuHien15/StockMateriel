@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils
 
 @BindingAdapter("item")
 fun bindImage(imgView: ImageView, item: Materiel?) {
-    Glide.with(imgView.context).load(R.drawable.bricologe_2).into(imgView)
+    Glide.with(imgView.context).load(R.drawable.materiel_de_bricolage).into(imgView)
 
     imgView.clipToOutline = true
 }

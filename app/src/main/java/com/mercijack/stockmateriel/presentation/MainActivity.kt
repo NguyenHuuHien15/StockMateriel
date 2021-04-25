@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     private var _dataBinding: ActivityMainBinding? = null
     private val dataBinding get() = _dataBinding!!
     private val viewModel: MainViewModel by viewModels()

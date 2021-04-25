@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MaterielsListViewModel @Inject constructor(private val interactors: Interactors) : ViewModel() {
-    val LOG_TAG = MaterielsListViewModel::class.simpleName
 
     private val _materielsList: MutableLiveData<List<Materiel>> = MutableLiveData()
     val materielsList: LiveData<List<Materiel>> get() = _materielsList

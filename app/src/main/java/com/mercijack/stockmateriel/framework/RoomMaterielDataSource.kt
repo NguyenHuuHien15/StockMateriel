@@ -9,6 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RoomMaterielDataSource @Inject constructor(private val materielDao: MaterielDao) : IMaterielDataSource {
+
     override suspend fun add(materiel: Materiel) {
         materielDao.addMateriel(MaterielEntity(materiel.code, materiel.name))
     }
@@ -27,4 +28,5 @@ class RoomMaterielDataSource @Inject constructor(private val materielDao: Materi
         val materielEntity = materielDao.getMaterielByCode(code) ?: return null
         return materielEntity.toDomain()
     }
+
 }

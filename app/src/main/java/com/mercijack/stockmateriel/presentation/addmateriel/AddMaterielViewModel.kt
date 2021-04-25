@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddMaterielViewModel @Inject constructor(private val interactors: Interactors) : ViewModel() {
-    val LOG_TAG = AddMaterielViewModel::class.simpleName
 
     private val _code = MutableLiveData<String>().apply {
         value = StringUtils.EMPTY
@@ -50,7 +49,6 @@ class AddMaterielViewModel @Inject constructor(private val interactors: Interact
             val nameValue = name.value.toString()
             val materielFromDb = interactors.getMaterielByCode.invoke(codeValue)
             val isMaterielExisted = materielFromDb != null
-            //Log.d(LOG_TAG, "Code = $codeValue, name = $nameValue, existed = $isMaterielExisted")
             if (isMaterielExisted) {
                 _isMaterielExistedInDb.value = true
             } else {
