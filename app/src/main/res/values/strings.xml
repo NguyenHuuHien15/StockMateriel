@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">StockMateriel</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="add_materiel_success">Matériel ajouté en succès</string>
     <string name="code_existed_materiel_not_added">Le code existant, matériel n\'est pas ajouté</string>
