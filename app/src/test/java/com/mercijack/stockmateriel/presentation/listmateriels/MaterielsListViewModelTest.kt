@@ -9,14 +9,14 @@ import com.mercijack.stockmateriel.interactors.GetAllMateriels
 import com.mercijack.stockmateriel.interactors.RemoveMateriel
 import com.mercijack.stockmateriel.materiel1
 import com.mercijack.stockmateriel.materiel2
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when` as whenever
 
 class MaterielsListViewModelTest {
 
@@ -33,19 +33,22 @@ class MaterielsListViewModelTest {
     private lateinit var removeMateriel: RemoveMateriel
 
     @ExperimentalCoroutinesApi
+    val dispatcher = TestCoroutineDispatcher()
+
+    @ExperimentalCoroutinesApi
     @Before
     fun setup() {
-        interactors = mock(Interactors::class.java)
-        getAllMateriels = mock(GetAllMateriels::class.java)
-        removeMateriel = mock(RemoveMateriel::class.java)
+        interactors = mockk()
+        getAllMateriels = mockk()
+        removeMateriel = mockk()
         viewModel = MaterielsListViewModel(interactors)
     }
 
     @ExperimentalCoroutinesApi
     @Test
-    fun updateMaterielsListEmpty() = runBlockingTest {
-        whenever(getAllMateriels.invoke()).thenReturn(listOf())
-        whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
+    fun updateMaterielsListEmpty() {
+        coEvery { getAllMateriels.invoke() } returns listOf()
+        coEvery { interactors.getAllMateriels } returns getAllMateriels
 
         viewModel.updateMaterielsList()
         assertEquals(listOf<Materiel>(), LiveDataTestUtil.getValue(viewModel.materielsList))
@@ -53,9 +56,9 @@ class MaterielsListViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun updateMaterielsList2Elements() = runBlockingTest {
-        whenever(getAllMateriels.invoke()).thenReturn(listOf(materiel1, materiel2))
-        whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
+    fun updateMaterielsList2Elements() {
+        coEvery { getAllMateriels.invoke() } returns listOf(materiel1, materiel2)
+        coEvery { interactors.getAllMateriels } returns getAllMateriels
 
         viewModel.updateMaterielsList()
         assertEquals(listOf(materiel1, materiel2), LiveDataTestUtil.getValue(viewModel.materielsList))
@@ -75,12 +78,12 @@ class MaterielsListViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun onBtnRemoveClicked() = runBlockingTest {
-        whenever(getAllMateriels.invoke()).thenReturn(listOf(materiel2))
-        whenever(interactors.getAllMateriels).thenReturn(getAllMateriels)
+    fun onBtnRemoveClicked() {
+        coEvery { getAllMateriels.invoke() } returns listOf(materiel2)
+        coEvery { interactors.getAllMateriels } returns getAllMateriels
 
-        whenever(removeMateriel.invoke(materiel1)).thenReturn(Unit)
-        whenever(interactors.removeMateriel).thenReturn(removeMateriel)
+        coEvery { removeMateriel.invoke(materiel1) } returns Unit
+        coEvery { interactors.removeMateriel } returns removeMateriel
 
         viewModel.onBtnRemoveClicked(materiel1)
 
