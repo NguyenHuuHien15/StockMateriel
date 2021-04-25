@@ -5,6 +5,7 @@ import com.mercijack.stockmateriel.presentation.MainViewModelTest;
 import com.mercijack.stockmateriel.presentation.addmateriel.AddMaterielViewModelTest;
 import com.mercijack.stockmateriel.presentation.home.HomeViewModelTest;
 import com.mercijack.stockmateriel.presentation.listmateriels.MaterielSearchFilterTest;
+import com.mercijack.stockmateriel.presentation.listmateriels.MaterielsListViewModelTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -18,6 +19,7 @@ import org.junit.runners.Suite;
         MainViewModelTest.class,
         HomeViewModelTest.class,
         AddMaterielViewModelTest.class,
+        MaterielsListViewModelTest.class,
 })
 // @formatter:on
 public class AllUnitTests {
