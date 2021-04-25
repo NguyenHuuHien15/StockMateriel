@@ -16,7 +16,7 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when` as whenever
 
-class HomeViewModelTest {
+class HomeViewModelUnitTest {
 
     @get:Rule(order = 0)
     var instantExecutorRule = InstantTaskExecutorRule()
@@ -37,7 +37,7 @@ class HomeViewModelTest {
         viewModel = HomeViewModel(interactors)
     }
 
-    @ExperimentalCoroutinesApi
+    /*@ExperimentalCoroutinesApi
     @Test
     fun updateNumberMateriels() = runBlockingTest {
         whenever(getAllMateriels.invoke()).thenReturn(listOf())
@@ -55,7 +55,7 @@ class HomeViewModelTest {
 
         viewModel.updateNumberMateriels()
         assertEquals(2, LiveDataTestUtil.getValue(viewModel.numberMateriels))
-    }
+    }*/
 
     @Test
     fun onBtnAddClicked() {
