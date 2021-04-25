@@ -33,7 +33,7 @@ import org.junit.runner.RunWith
 class AppTest {
 
     @get:Rule(order = 0)
-    var rule = HiltAndroidRule(this)
+    var hiltRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
     var activityScenarioRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
@@ -42,7 +42,7 @@ class AppTest {
 
     @Before
     fun setUp() {
-        rule.inject()
+        hiltRule.inject()
         activityScenarioRule.scenario.onActivity { activity ->
             if (activity != null) {
                 decorView = activity.window.decorView
