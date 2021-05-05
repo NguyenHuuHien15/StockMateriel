@@ -24,4 +24,4 @@ Réalisation :
 
 5. L'app a 2 groupes de tests : AllUnitTests (sans portable, ni émulateur Android), AllInstrumentedTests (avec un portable Android connecté à Android Studio)
 
-
+6. Les boutons en bas "Notifications" et "Messages" sont uniquement pour simuler. On peut ajouter plus tard les autres, par exemple : Paramètres, Aide, etc.
