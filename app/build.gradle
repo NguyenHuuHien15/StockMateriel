@@ -86,9 +86,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
     // Dagger
-    implementation "com.google.dagger:dagger:2.33"
-    kapt "com.google.dagger:dagger-compiler:2.33"
-    kaptAndroidTest "com.google.dagger:dagger-compiler:2.33"
+    implementation "com.google.dagger:dagger:2.35.1"
+    kapt "com.google.dagger:dagger-compiler:2.35.1"
+    kaptAndroidTest "com.google.dagger:dagger-compiler:2.35.1"
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.test.ext:junit:1.1.2'

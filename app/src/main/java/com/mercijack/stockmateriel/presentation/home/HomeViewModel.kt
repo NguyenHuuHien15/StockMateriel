@@ -58,4 +58,5 @@ class HomeViewModel @Inject constructor(private val interactors: Interactors) : 
     fun doneNavigateToMaterielsList() {
         _navigateToMaterielsList.value = false
     }
+
 }
