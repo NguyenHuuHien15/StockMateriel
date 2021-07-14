@@ -1,6 +1,5 @@
 package com.mercijack.stockmateriel.presentation.listmateriels
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -11,16 +10,16 @@ import com.mercijack.stockmateriel.presentation.GenericRecyListAdapter
 import com.mercijack.stockmateriel.presentation.IDiffItemCallback
 import com.mercijack.stockmateriel.presentation.ITextSearchFilter
 
-class MaterielsListRecyAdapter(_context: Context, list: List<Materiel>?, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>)
-    : GenericRecyListAdapter<Materiel>(_context, list, filter, diffCallback) {
+class MaterielsListRecyAdapter(list: MutableList<Materiel>, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>)
+    : GenericRecyListAdapter<Materiel>(list, filter, diffCallback) {
 
     private lateinit var materielsListViewModel: MaterielsListViewModel
     private lateinit var lifecycleOwner: LifecycleOwner
 
     constructor(
-        context: Context, list: List<Materiel>?, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>,
+        originalList: MutableList<Materiel>, filter: ITextSearchFilter<Materiel>?, diffCallback: IDiffItemCallback<Materiel>,
         materielsListViewModel: MaterielsListViewModel, lifecycleOwner: LifecycleOwner
-    ) : this(context, list, filter, diffCallback) {
+    ) : this(originalList, filter, diffCallback) {
 
         this.materielsListViewModel = materielsListViewModel
         this.lifecycleOwner = lifecycleOwner
