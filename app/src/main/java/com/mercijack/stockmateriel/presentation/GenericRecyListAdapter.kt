@@ -1,6 +1,5 @@
 package com.mercijack.stockmateriel.presentation
 
-import android.content.Context
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -9,26 +8,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
-open class GenericRecyListAdapter<K : Any?>(_context: Context, list: List<K>?, private var searchFilter: ITextSearchFilter<K>? = null, diffCallback: IDiffItemCallback<K>)
-    : ListAdapter<K, RecyclerView.ViewHolder>(MyDiffCallBack<K>(diffCallback)), Filterable {
+open class GenericRecyListAdapter<K : Any?>(
+    private var originalList: MutableList<K> = mutableListOf(),
+    private var searchFilter: ITextSearchFilter<K>? = null, diffCallback: IDiffItemCallback<K>
+) : ListAdapter<K, RecyclerView.ViewHolder>(MyDiffCallBack(diffCallback)), Filterable {
 
-    private var list: MutableList<K> // original list = list of non filtered items
     private var adapterFilter: AdapterFilter? = null
-    var context: Context
-
-    init {
-        if (list != null) {
-            this.list = ArrayList(list)
-        } else {
-            this.list = ArrayList()
-        }
-        submitList(this.list)
-        this.context = _context
-    }
 
     fun clear() {
-        list.clear()
-        submitList(list)
+        originalList.clear()
+        // Call method submitList to set of update display on recycler view
+        submitList(originalList)
     }
 
     override fun getFilter(): Filter {
@@ -38,10 +28,9 @@ open class GenericRecyListAdapter<K : Any?>(_context: Context, list: List<K>?, p
         return adapterFilter!!
     }
 
-    fun setList(newList: List<K>?) {
+    fun updateOriginalList(newList: List<K>?) {
         if (newList != null) {
-            list = ArrayList(newList)
-            submitList(list)
+            originalList = ArrayList(newList)
         }
     }
 
@@ -50,7 +39,7 @@ open class GenericRecyListAdapter<K : Any?>(_context: Context, list: List<K>?, p
             val filterResults = FilterResults()
             if (constraint.isNotEmpty()) {
                 val resultList = ArrayList<K>()
-                for (obj in list) {
+                for (obj in originalList) {
                     if (shouldBeDisplayed(constraint, obj)) {
                         resultList.add(obj)
                     }
@@ -58,8 +47,8 @@ open class GenericRecyListAdapter<K : Any?>(_context: Context, list: List<K>?, p
                 filterResults.count = resultList.size
                 filterResults.values = resultList
             } else {
-                filterResults.count = list.size
-                filterResults.values = list
+                filterResults.count = originalList.size
+                filterResults.values = originalList
             }
             return filterResults
         }
@@ -71,6 +60,7 @@ open class GenericRecyListAdapter<K : Any?>(_context: Context, list: List<K>?, p
          * @param results    filtered result
          */
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
+            // Call method submitList to set of update display on recycler view
             submitList(results.values as ArrayList<K>)
         }
 
@@ -100,7 +90,6 @@ open class GenericRecyListAdapter<K : Any?>(_context: Context, list: List<K>?, p
         override fun areContentsTheSame(oldItem: K, newItem: K): Boolean {
             return diffCallback.areContentsTheSame(oldItem, newItem)
         }
-
     }
 
 }

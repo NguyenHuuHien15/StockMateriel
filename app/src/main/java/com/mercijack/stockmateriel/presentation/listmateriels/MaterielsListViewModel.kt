@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.apache.commons.lang3.StringUtils
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,10 +25,13 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
     private val _removeSuccess = MutableLiveData<Boolean>()
     val removeSuccess: LiveData<Boolean> get() = _removeSuccess
 
+    private val _textToSearch = MutableLiveData<String>()
+    val textToSearch: LiveData<String> get() = _textToSearch
+
     init {
         _clickedItem.value = null
         _removeSuccess.value = false
-        updateMaterielsList()
+        _textToSearch.value = StringUtils.EMPTY
     }
 
     fun updateMaterielsList() {
@@ -60,6 +64,10 @@ class MaterielsListViewModel @Inject constructor(private val interactors: Intera
                 _removeSuccess.postValue(true)
             }
         }
+    }
+
+    fun updateTextToSearch(text: String) {
+        _textToSearch.value = text
     }
 
 }
