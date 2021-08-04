@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mercijack.stockmateriel">
 
-    <application>
+    <application android:allowBackup="true">
         <activity
             android:name=".HiltTestActivity"
-            android:exported="false"  />
+            android:exported="true" />
     </application>
 
 </manifest>
