@@ -8,7 +8,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Hien/Code/Android/MyCode/StockMateriel/app/src/main/res/drawable/background_rounded_rect_white.xml" value="0.15833333333333333" />
+        <entry key="..\:/Hien/Code/Android/MyCode/StockMateriel/app/src/main/res/layout/activity_main.xml" value="0.1671195652173913" />
+        <entry key="..\:/Hien/Code/Android/MyCode/StockMateriel/app/src/main/res/layout/fragment_add_materiel.xml" value="0.264" />
         <entry key="..\:/Hien/Code/Android/MyCode/StockMateriel/app/src/main/res/layout/fragment_home.xml" value="0.12360688956433637" />
+        <entry key="..\:/Hien/Code/Android/MyCode/StockMateriel/app/src/main/res/layout/fragment_materiels_list.xml" value="0.1" />
+        <entry key="..\:/Hien/Code/Android/MyCode/StockMateriel/app/src/main/res/layout/materiel_item_recylerview.xml" value="0.12360688956433637" />
       </map>
     </option>
   </component>
